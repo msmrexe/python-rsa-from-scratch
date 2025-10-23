@@ -23,7 +23,7 @@ The system can generate public/private key pairs, encrypt plaintext messages, an
 The project is organized into a modular structure for clarity and maintainability:
 
 ```
-rsa-project/
+python-rsa-implementation/
 ├── .gitignore         # Git ignore file
 ├── README.md          # This documentation file
 ├── crypto_math.py     # Core math: Miller-Rabin, Karatsuba, EGCD, etc.
@@ -89,3 +89,17 @@ Decrypting ciphertext from ciphertext.txt using key private.key...
 Hello, this is a secret message!
 -------------------------
 ```
+
+## Author
+
+Feel free to connect or reach out if you have any questions!
+
+* **Maryam Rezaee**
+* **GitHub:** `[@msmrexe](https://github.com/msmrexe)`
+* **Email:** `ms.maryamrezaee@gmail.com`
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for full details.
