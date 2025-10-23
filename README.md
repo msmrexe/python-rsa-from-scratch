@@ -18,6 +18,57 @@ The system can generate public/private key pairs, encrypt plaintext messages, an
 * **Robust Blocking**: Automatically handles message blocking and padding based on key size.
 * **CLI Interface**: A clean, command-line interface using `argparse` for all operations.
 
+## How It Works
+
+The RSA algorithm's security relies on the practical difficulty of factoring the product of two large prime numbers (factoring `n` into `p` and `q`). The process is split into three phases:
+
+### 1\. Key Generation
+
+This is the most complex step, where the public and private keys are created.
+
+1.  **Find Primes**: Two distinct, large prime numbers, $p$ and $q$, are found.
+      * This implementation uses the **LCG** (`lcg_prng`) to generate large random number candidates.
+      * Each candidate is checked for primality using the **Miller-Rabin Primality Test** (`is_prime`).
+2.  **Calculate Modulus**: The modulus $n$ is calculated by multiplying the primes:
+      * $n = p \times q$
+      * This implementation uses the **Karatsuba Algorithm** (`karatsuba_multiply`) for this large multiplication.
+      * $n$ is used for *both* the public and private keys.
+3.  **Calculate Totient**: Euler's totient function, $\phi(n)$, is calculated.
+      * $\phi(n) = (p-1) \times (q-1)$
+      * This value is kept secret and is crucial for finding the private key.
+4.  **Find Public Exponent ($e$)**: An integer $e$ is chosen such that $1 < e < \phi(n)$ and $e$ is coprime to $\phi(n)$ (i.e., $\text{gcd}(e, \phi(n)) = 1$).
+      * This implementation uses the common standard $e = 65537$ ($2^{16} + 1$).
+5.  **Find Private Exponent ($d$)**: The private exponent $d$ is calculated as the modular multiplicative inverse of $e$ modulo $\phi(n)$.
+      * $d \equiv e^{-1} \pmod{\phi(n)}$
+      * This implementation finds $d$ using the **Extended Euclidean Algorithm** (`egcd` and `modinv`).
+
+**The Keys:**
+
+  * **Public Key**: $(e, n)$. This pair is shared publicly for encrypting messages.
+  * **Private Key**: $(d, n)$. This pair is kept secret for decrypting messages.
+
+### 2\. Message Blocking
+
+Before encryption, the string message (e.g., "Hello") must be converted into one or more integers ($m$) that are smaller than $n$.
+
+1.  The string is encoded into `bytes` (e.g., UTF-8).
+2.  These bytes are split into blocks, each small enough to ensure the resulting integer $m$ is less than $n$.
+3.  Each block of bytes is converted into a large integer using the `bytes_to_int` function (which treats the bytes as a base-256 number).
+
+### 3\. Encryption
+
+With the public key $(e, n)$ and a message block $m$, the ciphertext $c$ is calculated:
+$$c = m^e \pmod{n}$$
+
+  * This is performed by the `modexpo` function (modular exponentiation).
+
+### 4\. Decryption
+
+With the private key $(d, n)$ and a ciphertext block $c$, the original message block $m$ is recovered:
+$$m = c^d \pmod{n}$$
+
+  * This also uses the efficient `modexpo` function. The recovered integer $m$ is then converted back into bytes using `int_to_bytes` and decoded into a string.
+
 ## Project Structure
 
 This project is structured as a Python package for clean separation of concerns:
