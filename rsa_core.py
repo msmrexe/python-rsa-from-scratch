@@ -10,7 +10,7 @@ This module handles:
 """
 
 from crypto_math import karatsuba_multiply, gcd, modinv, modexpo
-from utils import generate_prime_pair
+from utils import generate_prime_pair, bytes_to_int, int_to_bytes
 
 # Standard public exponent
 DEFAULT_E = 65537  # 2^16 + 1
@@ -78,6 +78,7 @@ def encrypt(message: str, public_key: tuple[int, int]) -> list[int]:
         raise ValueError("Key size is too small to encrypt any data.")
 
     encrypted_blocks = []
+    # Encode string to bytes (crucial step)
     message_bytes = message.encode('utf-8')
     
     # Split message into blocks
@@ -85,7 +86,7 @@ def encrypt(message: str, public_key: tuple[int, int]) -> list[int]:
         block = message_bytes[i:i + max_block_size]
         
         # Convert byte block to integer
-        m = int.from_bytes(block, 'big')
+        m = bytes_to_int(block)
         
         # Encrypt: c = m^e mod n
         c = modexpo(m, e, n)
@@ -107,9 +108,6 @@ def decrypt(cipher_blocks: list[int], private_key: tuple[int, int]) -> str:
     """
     d, n = private_key
     
-    # Calculate key size in bytes
-    key_bytes = (n.bit_length() + 7) // 8
-    
     decrypted_bytes = b''
     
     for c in cipher_blocks:
@@ -117,13 +115,7 @@ def decrypt(cipher_blocks: list[int], private_key: tuple[int, int]) -> str:
         m = modexpo(c, d, n)
         
         # Convert decrypted integer back to bytes
-        # Pad to the full key_bytes size to handle leading zeros,
-        # then strip padding later. A simpler way is to just
-        # calculate the needed bytes.
-        try:
-            block_bytes = m.to_bytes((m.bit_length() + 7) // 8, 'big')
-        except OverflowError:
-            block_bytes = b'' # Handle case where m is 0
+        block_bytes = int_to_bytes(m)
 
         decrypted_bytes += block_bytes
         
