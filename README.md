@@ -20,7 +20,7 @@ The system can generate public/private key pairs, encrypt plaintext messages, an
 
 ## Project Structure
 
-The project is organized into a modular structure for clarity and maintainability:
+This project is structured as a Python package for clean separation of concerns:
 
 ```
 python-rsa-from-scratch/
