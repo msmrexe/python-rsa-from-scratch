@@ -23,7 +23,7 @@ The system can generate public/private key pairs, encrypt plaintext messages, an
 The project is organized into a modular structure for clarity and maintainability:
 
 ```
-python-rsa-implementation/
+python-rsa-from-scratch/
 ├── .gitignore         # Git ignore file
 ├── LICENSE            # MIT license file
 ├── README.md          # This documentation file
