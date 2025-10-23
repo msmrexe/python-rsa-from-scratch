@@ -25,6 +25,7 @@ The project is organized into a modular structure for clarity and maintainabilit
 ```
 python-rsa-implementation/
 ├── .gitignore         # Git ignore file
+├── LICENSE            # MIT license file
 ├── README.md          # This documentation file
 ├── crypto_math.py     # Core math: Miller-Rabin, Karatsuba, EGCD, etc.
 ├── utils.py           # Helper functions (e.g., prime pair generation)
@@ -95,8 +96,8 @@ Hello, this is a secret message!
 Feel free to connect or reach out if you have any questions!
 
 * **Maryam Rezaee**
-* **GitHub:** `[@msmrexe](https://github.com/msmrexe)`
-* **Email:** `ms.maryamrezaee@gmail.com`
+* **GitHub:** [@msmrexe](https://github.com/msmrexe)
+* **Email:** [ms.maryamrezaee@gmail.com](mailto:ms.maryamrezaee@gmail.com)
 
 ---
 
