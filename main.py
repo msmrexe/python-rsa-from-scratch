@@ -12,7 +12,7 @@ This script is the main entry point for the application.
 """
 
 import argparse
-import rsa_core
+from rsa import rsa_core
 
 def save_key_to_file(key: tuple, filename: str):
     """Saves a key (e, n) or (d, n) to a file."""
