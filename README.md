@@ -29,10 +29,10 @@ python-rsa-from-scratch/
 ├── README.md             # This documentation file
 ├── main.py               # Main runnable script with the argparse CLI
 └── rsa/
-    ├── __init__.py      # Initialize package
-    ├── crypto_math.py   # Core math: Miller-Rabin, Karatsuba, EGCD, etc.
-    ├── rsa_core.py      # High-level RSA logic: generate_keys, encrypt, decrypt
-    └── utils.py         # Helper functions (e.g., prime pair generation)
+    ├── __init__.py       # Initialize package
+    ├── crypto_math.py    # Core math: Miller-Rabin, Karatsuba, EGCD, etc.
+    ├── rsa_core.py       # High-level RSA logic: generate_keys, encrypt, decrypt
+    └── utils.py          # Helper functions (e.g., prime pair generation)
 ```
 
 ## Usage
