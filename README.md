@@ -24,13 +24,15 @@ The project is organized into a modular structure for clarity and maintainabilit
 
 ```
 python-rsa-from-scratch/
-├── .gitignore         # Git ignore file
-├── LICENSE            # MIT license file
-├── README.md          # This documentation file
-├── crypto_math.py     # Core math: Miller-Rabin, Karatsuba, EGCD, etc.
-├── utils.py           # Helper functions (e.g., prime pair generation)
-├── rsa_core.py        # High-level RSA logic: generate_keys, encrypt, decrypt
-└── main.py            # Main runnable script with the argparse CLI
+├── .gitignore            # Git ignore file
+├── LICENSE               # MIT license file
+├── README.md             # This documentation file
+├── main.py               # Main runnable script with the argparse CLI
+└── rsa/
+    ├── __init__.py      # Initialize package
+    ├── crypto_math.py   # Core math: Miller-Rabin, Karatsuba, EGCD, etc.
+    ├── rsa_core.py      # High-level RSA logic: generate_keys, encrypt, decrypt
+    └── utils.py         # Helper functions (e.g., prime pair generation)
 ```
 
 ## Usage
@@ -90,6 +92,8 @@ Decrypting ciphertext from ciphertext.txt using key private.key...
 Hello, this is a secret message!
 -------------------------
 ```
+
+---
 
 ## Author
 
