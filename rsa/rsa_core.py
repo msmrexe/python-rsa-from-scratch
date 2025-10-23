@@ -9,8 +9,8 @@ This module handles:
 - Decrypting ciphertext (with padding/blocking).
 """
 
-from crypto_math import karatsuba_multiply, gcd, modinv, modexpo
-from utils import generate_prime_pair, bytes_to_int, int_to_bytes
+from .crypto_math import karatsuba_multiply, gcd, modinv, modexpo
+from .utils import generate_prime_pair, bytes_to_int, int_to_bytes
 
 # Standard public exponent
 DEFAULT_E = 65537  # 2^16 + 1
