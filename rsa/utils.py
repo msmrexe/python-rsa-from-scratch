@@ -6,7 +6,7 @@ prime number generation.
 """
 
 import time
-from crypto_math import lcg_prng, is_prime
+from .crypto_math import lcg_prng, is_prime
 
 def generate_prime_pair(bits: int = 1024) -> tuple[int, int]:
     """
